@@ -1,0 +1,69 @@
+/* ===================== register form ====================== */
+
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    
+    margin-left: 200px;
+    margin-top: none;
+    flex-direction: column;
+    background-color: #ffdee9;
+    background-image: linear-gradient(0deg, #b81149 0%, #c7db14 100%);
+}
+
+.form-container form{
+    box-shadow: rgba(187, 16, 16, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: #fff;
+
+}
+
+.form-container form .title{
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-family: "playfair Display", serif;
+}
+
+.form-container form input{
+    border: none;
+    border-bottom: 1px solid #000;
+    border-radius: 0;
+}
+
+.form-container form button{
+    border: 1px solid black;
+    border-radius: 0;
+    background-color: blue;
+    color: white;
+    width: 260px;
+}
+
+.form-container form button:hover{
+    border: 1px solid black;
+    background: green;
+    background: -webkit-linear-gradient(
+        to right,
+        #7cbd13,
+        green
+    );
+    background: linear-gradient(
+        to right,
+        #45c026,
+        green
+    );
+}
+
+.form-container form .forgot {
+    color: rgb(255, 0, 34);
+    background-color: white;
+    border: none;
+}
+
+.form-container form .forgot:hover {
+    border: none;
+    background: none;
+    color: hotpink;
+}
