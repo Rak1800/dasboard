@@ -2,7 +2,6 @@ const userModel = require("../Models/userModel");
 
 const register = async function (req, res) {
     try {
-
         const data = req.body;
         const { name, myId, gender, age, mobile, email, password, address, position, referId } = data
         if (Object.keys(data).length == 0) return res.status(400).send({ status: false, alert: "please provide some data" })
@@ -27,6 +26,7 @@ const register = async function (req, res) {
         }
         if (databaselength.length >= 1) {
             // refer Id check in database 
+            if (!referId) return res.status(400).send({ status: false, alert: "referId is required" })
             const checkreferIdvalid = await userModel.findOne({ myId: referId })
             if (!checkreferIdvalid)
                 return res.status(400).send({ status: false, alert: "refer Id is not available" })
@@ -55,18 +55,6 @@ const register = async function (req, res) {
             }
         }
 
-        // if(checkposition.position=="right" && checkposition.position=="left") {
-        //     return res.status(400).send({status:false,message:"please share your refer in the left side"})
-        // }
-
-
-        // const checkrightside= await userModel.findOne({referId:referId,positon:position})
-        // if(checkrightside)  return res.status(400).send({status:false,message:"please share your refer in the left side"})
-
-
-
-
-
     } catch (error) {
         res.status(500).send({ status: false, message: error.message }) 
     }
@@ -77,17 +65,48 @@ const login = async (req, res) => {
     try {
         const data = req.body
         const { email, password } = data
-        if (!email) return res.status(400).send({ status: false, message: "Name is required" })
-        if (!password) return res.status(400).send({ status: false, message: "Name is required" })
+        if (!email) return res.status(400).send({ status: false, alert: "Name is required" })
+        if (!password) return res.status(400).send({ status: false, alert: "Name is required" })
         const checkUser = await userModel.findOne({ email: email, password: password })
-        if (!checkUser) res.status(500).send({ status: false, message: "user not register, please register" })
-        return res.status(200).send({ status: true, message: "login successful" ,checkUser})
+        if (!checkUser) res.status(500).send({ status: false, alert: "user not register, please register" })
+        return res.status(200).send({ status: true, alert: "login successful" ,checkUser})
 
 
     } catch (error) {
-        res.status(500).send({ status: false, message: error.message })
+        res.status(500).send({ status: false, message: error.message })  
     }
 
 }
+const getrefreIdChild= async (req,res)=>{
+   
+    const myId=req.params.myId
+    let arr1=[]
+    let arr=[]
+    
+    let childArr=await userModel.findOne({childs:arr1,myId:myId}) 
+    let checkChild= await userModel.find({referId:myId})
+    //childArr.forEach(k=>k.childs.push(checkChild))
+     childArr.childs.push(checkChild)
+  //  console.log(checkChild,childArr.childs)
+    arr.push(childArr)
+let id=[]
+checkChild.forEach(o=>id.push(o.myId))
+if(id.length>0){
+    for(let i=0;i<id.length;i++) {
+    childArr=await userModel.findOne({childs:arr1,myId:id[i]})
+    checkChild=  await userModel.find({referId:id[i]}) 
+    console.log(checkChild,childArr.childs)
+    //childArr.forEach(k=>k.childs.push(checkChild))
+     childArr1.childs.push(checkChild)
+    arr.push(childArr)
+    checkChild.forEach(o=>id.push(o.myId)) 
+    }  
+}
+    
 
-module.exports = { register, login }
+res.send(childArr) 
+console.log(arr,childArr) 
+
+}
+
+module.exports = { register, login, getrefreIdChild }

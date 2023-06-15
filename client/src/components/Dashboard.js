@@ -4,18 +4,19 @@ import {BiUserCircle} from "react-icons/bi"
 
 
 function Dashboard() {
-  
-
   return (
+    <>
     <div className='dash'>
       <h1>DASHBOARD
       <div className='user'>
-       <button>
+       <button className='profile'>
        <BiUserCircle />
         </button> 
-        </div></h1>
-        
+        </div>
+        </h1> 
     </div>
+    
+    </>
   )
 }
 

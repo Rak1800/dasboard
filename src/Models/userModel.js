@@ -41,6 +41,9 @@ const userSchema=new mongoose.Schema({
     },
     referId:{
        type:Number
+    },
+    childs:{
+        type:Array
     }
 
 },{timestamps:true})

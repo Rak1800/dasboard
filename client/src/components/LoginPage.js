@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import "./UserStyle.css"
-import Dashboard from './Dashboard'
 
 export default function LoginPage() {
   
@@ -18,8 +17,9 @@ export default function LoginPage() {
     {email:email,password:pass})
    if(res.data.status){ 
     console.log(res.data.checkUser.myId)
-    localStorage.setItem("user", JSON.stringify(res))    
+    localStorage.setItem("user", JSON.stringify(res))     
     alert(`${res.data.alert}`)
+    console.log(res.data.alert)
     navigate("/")
    }else{
     alert(`${res.data.alert}`)
@@ -42,7 +42,7 @@ export default function LoginPage() {
           id="exampleInputEmail"
           placeholder='Enter your Email'
           required
-        />
+        /> 
       </div>
       <div className="mb-3">
         <input type="password"
@@ -51,13 +51,10 @@ export default function LoginPage() {
           className="form-control"
           id="exampleInputPassword1"
           placeholder='Enter your Password'
-        
         />
       </div>
-      
       <button type="submit" className="btn btn-primary">LOGIN</button>
     </form>
-    < Dashboard id="" />
   </div>
  
   )

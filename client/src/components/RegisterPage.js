@@ -17,7 +17,7 @@ export default function RegisterPage() {
   const navigate=useNavigate()
 
   useEffect(() => {
-    let auth = localStorage.getItem("user")
+    let auth = localStorage.getItem("user")  
     if (auth) {
       navigate("/login")
     }
@@ -30,14 +30,15 @@ export default function RegisterPage() {
     {name:name,gender:gender,age:age,mobile:mobile,email:email,password:pass,address:address,position:position,referId:refer})
    if(res.data.status){
     alert(`${res.data.alert}`)
+   // console.log(res.data.alert)
     
     navigate("/login")
    }else{
     alert(`${res.data.alert}`)
    }
-}catch(error){
-    console.log(error)  
-    alert(error.message)
+}catch(error){ 
+     console.log(error.response.data.alert)  
+    alert(error.response.data.alert) 
    }
   }
 //  useEffect(()=>{

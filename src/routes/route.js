@@ -1,8 +1,10 @@
-const { register, login } = require("../Controllers/userController");
+const { register, login, getrefreIdChild } = require("../Controllers/userController");
 
 const router= require("express").Router();
 
 router.post("/register",register)
 router.post("/login",login)
 
-module.exports=router
+router.get("/child/:myId",getrefreIdChild)
+
+module.exports=router 
